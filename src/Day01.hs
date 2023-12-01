@@ -1,6 +1,5 @@
 module Day01 (solve) where
 import Data.Char (isDigit)
-import Debug.Trace (traceShowId)
 
 firstLastDigit :: String -> String
 firstLastDigit s = let digits = filter isDigit s in [head digits, last digits]
@@ -8,11 +7,10 @@ firstLastDigit s = let digits = filter isDigit s in [head digits, last digits]
 part1 :: [String] -> Int
 part1 ls = sum (read . firstLastDigit <$> ls)
 
-firstAndLastNum :: String -> String
-firstAndLastNum s = 
-  case traceShowId $ foldl findFirstAndLast (Nothing, Nothing) $ droppingHead s of
+firstLastNum :: String -> String
+firstLastNum s = 
+  case foldl findFirstAndLast (Nothing, Nothing) $ droppingHead s of
     (Just f, Just l) -> [f, l]
-    (Just f, Nothing) -> [f]
     _ -> error s
   where
     droppingHead :: [a] -> [[a]]
@@ -21,7 +19,7 @@ firstAndLastNum s =
 
     findFirstAndLast :: (Maybe Char, Maybe Char) -> String -> (Maybe Char, Maybe Char)
     findFirstAndLast firstAndLast nextWindow =
-      case traceShowId nextWindow of
+      case nextWindow of
         '1' : _ -> replaceNeeded firstAndLast '1'
         'o' : 'n' : 'e' : _ -> replaceNeeded firstAndLast '1'
         '2' : _ -> replaceNeeded firstAndLast '2'
@@ -42,11 +40,11 @@ firstAndLastNum s =
         'n' : 'i' : 'n' : 'e' : _ -> replaceNeeded firstAndLast '9'
         _ -> firstAndLast
 
-    replaceNeeded (Nothing, _) new = (Just new, Nothing)
+    replaceNeeded (Nothing, _) new = (Just new, Just new)
     replaceNeeded (Just f, _) new = (Just f, Just new)
 
 part2 :: [String] -> Int
-part2 ls = sum (read . firstAndLastNum <$> ls)
+part2 ls = sum (read . firstLastNum <$> ls)
 
 solve :: String -> (String, String)
 solve input =
