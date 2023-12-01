@@ -3,13 +3,17 @@ module Main (main) where
 import System.Environment (getArgs)
 import qualified Day01 as D1
 
+solvers :: [String -> (String, String)]
+solvers =
+  [
+    D1.solve
+  ]
+
 main :: IO ()
 main = do
   args <- getArgs
-  let (solver, day) = case args of
-        ["1"] -> (D1.solve, 1)
-        _ -> error "no day"
-  (part1, part2) <- solveDay solver day
+  let day = read (head args)
+  (part1, part2) <- solveDay (solvers !! (day - 1)) day
   putStrLn $ "Part 1: " ++ part1 ++ "\nPart 2: " ++ part2
 
 solveDay :: (String -> (String, String)) -> Int -> IO (String, String)
