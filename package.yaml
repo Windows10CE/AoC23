@@ -18,6 +18,8 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 - split
+- parsec
+- containers
 
 ghc-options:
 - -Wall
@@ -29,6 +31,7 @@ ghc-options:
 - -Wmissing-home-modules
 - -Wpartial-fields
 - -Wredundant-constraints
+- -Wno-unused-do-bind
 
 library:
   source-dirs: src
