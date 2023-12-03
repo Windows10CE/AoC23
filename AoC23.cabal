@@ -23,6 +23,7 @@ library
   exposed-modules:
       Day01
       Day02
+      Day03
   other-modules:
       Paths_AoC23
   autogen-modules:
@@ -36,8 +37,10 @@ library
       base >=4.7 && <5
     , containers
     , criterion
+    , extra
     , parsec
     , split
+    , transformers
   default-language: Haskell2010
 
 executable AoC23-exe
@@ -56,6 +59,8 @@ executable AoC23-exe
     , base >=4.7 && <5
     , containers
     , criterion
+    , extra
     , parsec
     , split
+    , transformers
   default-language: Haskell2010

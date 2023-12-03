@@ -6,12 +6,14 @@ import Criterion.Main
 import System.Environment (getArgs)
 import qualified Day01 as D1
 import qualified Day02 as D2
+import qualified Day03 as D3
 
 solvers :: [String -> (String, String)]
 solvers =
   [
     D1.solve,
-    D2.solve
+    D2.solve,
+    D3.solve
   ]
 
 main :: IO ()
