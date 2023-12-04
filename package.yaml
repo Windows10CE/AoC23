@@ -38,6 +38,8 @@ ghc-options:
 
 default-extensions:
 - TupleSections
+- LambdaCase
+- ScopedTypeVariables
 
 library:
   source-dirs: src
