@@ -42,12 +42,15 @@ part1 cards =
 
 part2 :: [Card] -> Int
 part2 cards =
-  sum $ snd <$> M.toList (foldl folding (M.fromList [(i, 1) | i <- [0..(length cards - 1)]]) (zip cards [0..]))
+  sum $ snd <$> M.toList (foldl folding (M.fromList $ fmap (, 1) [0..(length cards - 1)]) (zip cards [0..]))
   where
     folding cardMap (card, index) =
       let currentCardCount = fromMaybe 0 $ cardMap M.!? index
           offset = winCount card
-      in foldr (M.alter (\case { Just current -> Just $ current + currentCardCount; Nothing -> Just currentCardCount })) cardMap [(index + 1)..(index + offset)]
+      in foldr (M.alter (insertOrAdd currentCardCount)) cardMap [(index + 1)..(index + offset)]
+
+    insertOrAdd val (Just current) = Just $ val + current
+    insertOrAdd val Nothing = Just val
 
 solve :: String -> (String, String)
 solve input =
