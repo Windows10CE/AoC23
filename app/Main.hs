@@ -7,13 +7,15 @@ import System.Environment (getArgs)
 import qualified Day01 as D1
 import qualified Day02 as D2
 import qualified Day03 as D3
+import qualified Day04 as D4
 
 solvers :: [String -> (String, String)]
 solvers =
   [
     D1.solve,
     D2.solve,
-    D3.solve
+    D3.solve,
+    D4.solve
   ]
 
 main :: IO ()
